@@ -9,6 +9,7 @@ Installing: ng add @angular/material
 2. [Button](#button)
 3. [Button Toggle](#buttonToggle)
 4. [Icon](#icon)
+5. [Badges](#badges)
 
 ## 1. Typography <a name="typography"></a>
 ![image](https://user-images.githubusercontent.com/71009398/126654265-33302da7-a26d-4096-a9b2-1a263b1fa6a0.png)<br/>
@@ -111,6 +112,58 @@ HTML:
 </div>
 ```
 
+## 5. Badges <a name="badges"></a>
+![image](https://user-images.githubusercontent.com/71009398/126656317-d75ba184-e3e7-4478-8409-d0bf4592fce1.png)<br/>
+
+HTML:
+```
+<!--to avoid overlap, use matBadgeOverlap="false", and to hide the badge when there is no notification use matBadgeHidden-->
+<div>
+  <span [matBadge]="notifications" [matBadgeHidden]="notifications == 0">Notifications</span>
+</div>
+
+
+<!--position of badges-->
+<div>
+  <span matBadge="5" matBadgePosition="below before">Notifications</span>
+</div>
+
+<div>
+  <span matBadge="5" matBadgePosition="below after">Notifications</span>
+</div>
+
+<div>
+  <span matBadge="5" matBadgePosition="above before">Notifications</span>
+</div>
+
+
+<!--size of badges-->
+<div>
+  <span matBadge="5" matBadgeSize="small">Notifications</span>
+</div>
+
+<div>
+  <span matBadge="5" matBadgeSize="medium">Notifications</span>
+</div>
+
+<div>
+  <span matBadge="5" matBadgeSize="large">Notifications</span>
+</div>
+
+
+<!--color of badges-->
+<div>
+  <span matBadge="5" matBadgeColor="primary">Notifications</span>
+</div>
+
+<div>
+  <span matBadge="5" matBadgeColor="accent">Notifications</span>
+</div>
+
+<div>
+  <span matBadge="5" matBadgeColor="warn" matBadgeOverlap="false">Notifications</span>
+</div>
+```
 
 
 
