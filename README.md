@@ -165,6 +165,10 @@ HTML:
 </div>
 ```
 
+component.ts:
+```
+  notifications = 2;
+```
 
 
 
