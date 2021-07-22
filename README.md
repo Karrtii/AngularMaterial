@@ -6,6 +6,7 @@ Installing: ng add @angular/material
 
 ## Table of Contents
 1. [Typography](#typography)
+2. [Button](#button)
 
 ## 1. Typography <a name="typography"></a>
 ![image](https://user-images.githubusercontent.com/71009398/126654265-33302da7-a26d-4096-a9b2-1a263b1fa6a0.png)<br/>
@@ -34,3 +35,31 @@ Installing: ng add @angular/material
   <h4>This is a heading for h4</h4>
 </div>
 ```
+
+## 2. Button <a name="button"></a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
