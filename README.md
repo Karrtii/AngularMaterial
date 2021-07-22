@@ -8,6 +8,7 @@ Installing: ng add @angular/material
 1. [Typography](#typography)
 2. [Button](#button)
 3. [Button Toggle](#buttonToggle)
+4. [Icon](#icon)
 
 ## 1. Typography <a name="typography"></a>
 ![image](https://user-images.githubusercontent.com/71009398/126654265-33302da7-a26d-4096-a9b2-1a263b1fa6a0.png)<br/>
@@ -99,6 +100,16 @@ HTML:
 </div>
 ```
 
+## 4. Icon <a name="icon"></a>
+![image](https://user-images.githubusercontent.com/71009398/126655949-bc914c7a-8cb6-40bf-aeeb-c2d0935e016d.png)<br/>
+
+HTML:
+```
+<!-- icon names - https://fonts.google.com/icons?selected=Material+Icons-->
+<div>
+  <mat-icon color="primary">grade</mat-icon>
+</div>
+```
 
 
 
