@@ -13,6 +13,8 @@ Installing: ng add @angular/material
 ![image](https://user-images.githubusercontent.com/71009398/126654427-7b807403-df63-4c02-ba32-15a912c22c89.png)<br/>
 ![image](https://user-images.githubusercontent.com/71009398/126654468-880a1896-d6a6-4bb9-ae73-b04892876a12.png)<br/>
 ![image](https://user-images.githubusercontent.com/71009398/126654523-bd5a0aa5-3913-46b6-a8f8-bff78ba95737.png)<br/>
+
+HTML:
 ```
 <div class="mat-display-4">This is display 4</div>
 <div class="mat-display-3">This is display 3</div>
@@ -37,7 +39,32 @@ Installing: ng add @angular/material
 ```
 
 ## 2. Button <a name="button"></a>
+![image](https://user-images.githubusercontent.com/71009398/126654908-90f0cd9b-b6af-403b-8463-31b25008d501.png)<br/>
 
+HTML:
+```
+<div>
+  <button mat-button>Click me!</button>
+  <button mat-raised-button>Click me!</button>
+  <button mat-flat-button>Click me!</button>
+  <button mat-stroked-button>Click me!</button>
+</div>
+
+<div>
+  <button mat-icon-button>Icon</button>
+  <button mat-fab>Fab</button>
+  <button mat-mini-fab>mini</button>
+</div>
+
+<div>
+  <button color="primary" mat-button>Primary</button>
+  <button color="accent" mat-button>Accent</button>
+  <button color="warn" disableRipple mat-button>Warn</button>  <!--Ripple effect disabled as well-->
+
+  <button color="primary" mat-raised-button>Primary</button>
+  <button color="accent" mat-raised-button>Accent</button>
+  <button color="warn" mat-raised-button>Warn</button>
+</div>
 
 
 
