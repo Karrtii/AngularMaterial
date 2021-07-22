@@ -7,6 +7,7 @@ Installing: ng add @angular/material
 ## Table of Contents
 1. [Typography](#typography)
 2. [Button](#button)
+3. [Button Toggle](#buttonToggle)
 
 ## 1. Typography <a name="typography"></a>
 ![image](https://user-images.githubusercontent.com/71009398/126654265-33302da7-a26d-4096-a9b2-1a263b1fa6a0.png)<br/>
@@ -65,10 +66,38 @@ HTML:
   <button color="accent" mat-raised-button>Accent</button>
   <button color="warn" mat-raised-button>Warn</button>
 </div>
+```
 
+## 3. Button Toggle <a name="buttonToggle"></a>
+![image](https://user-images.githubusercontent.com/71009398/126655447-e033762a-a5fb-46d7-b5cc-7d0bbc7e733a.png)<br/>
 
+HTML:
+```
+<div>
+  <mat-button-toggle #toggleButton checked>Toggle</mat-button-toggle>
+  {{toggleButton.checked}}
+</div>
 
+<!--Toggle between one of them-->
+<div>
+  <mat-button-toggle-group #toggleGroup="matButtonToggleGroup">
+    <mat-button-toggle value="angular">Angular</mat-button-toggle>
+    <mat-button-toggle value="android">Android</mat-button-toggle>
+    <mat-button-toggle value="blazor">Blazor</mat-button-toggle>
+  </mat-button-toggle-group>
+  {{toggleGroup.value}}
+</div>
 
+<!--Can choose multiple-->
+<div>
+  <mat-button-toggle-group #toggleGroup2="matButtonToggleGroup" multiple>
+    <mat-button-toggle value="angular">Angular</mat-button-toggle>
+    <mat-button-toggle value="android">Android</mat-button-toggle>
+    <mat-button-toggle value="blazor">Blazor</mat-button-toggle>
+  </mat-button-toggle-group>
+  {{toggleGroup2.value}}
+</div>
+```
 
 
 
