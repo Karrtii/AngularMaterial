@@ -9,4 +9,21 @@ export class AppComponent {
   title = 'MaterialDemo';
 
   notifications = 2;
+
+  showSpinner = false;
+
+  opened = false;
+
+  loadData()
+  {
+    this.showSpinner=true;
+    setTimeout(() => {
+      this.showSpinner = false;
+    }, 5000);
+  }
+
+  log(state: any)
+  {
+    console.log(state);
+  }
 }
