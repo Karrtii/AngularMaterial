@@ -10,6 +10,7 @@ Installing: ng add @angular/material
 3. [Button Toggle](#buttonToggle)
 4. [Icon](#icon)
 5. [Badges](#badges)
+6. [Progress Spinner](#progressSpinner)
 
 ## 1. Typography <a name="typography"></a>
 ![image](https://user-images.githubusercontent.com/71009398/126654265-33302da7-a26d-4096-a9b2-1a263b1fa6a0.png)<br/>
@@ -170,8 +171,31 @@ component.ts:
   notifications = 2;
 ```
 
+## 6. Progress Spinner <a name="progressSpinner"/>
+![image](https://user-images.githubusercontent.com/71009398/126904398-f4c918a7-182a-433a-b77b-7d799f9aac98.png)<br/>
 
+HTML:
+```
+<div>
+    <mat-progress-spinner value="40"></mat-progress-spinner>
+</div>
 
+<div>
+    <mat-spinner *ngIf="showSpinner" color="accent"></mat-spinner>
+    <button (click)="loadData()">Load Data</button>
+</div>
+```
+
+component.ts:
+```
+loadData()
+  {
+    this.showSpinner=true;
+    setTimeout(() => {
+      this.showSpinner = false;
+    }, 5000);
+  }
+```
 
 
 
