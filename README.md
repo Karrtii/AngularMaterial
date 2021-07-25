@@ -11,6 +11,9 @@ Installing: ng add @angular/material
 4. [Icon](#icon)
 5. [Badges](#badges)
 6. [Progress Spinner](#progressSpinner)
+7. [Toolbar/Navbar](#toolbar)
+8. [Sidenav](#sidenav)
+9. [Menu](#menu)
 
 ## 1. Typography <a name="typography"></a>
 ![image](https://user-images.githubusercontent.com/71009398/126654265-33302da7-a26d-4096-a9b2-1a263b1fa6a0.png)<br/>
@@ -197,8 +200,83 @@ loadData()
   }
 ```
 
+## 7. Toolbar/Navbar <a name="toolbar"/>
+![image](https://user-images.githubusercontent.com/71009398/126904502-66ee4b32-a0cb-4ad1-be23-2f908bb74c4b.png)<br/>
+
+HTML:
+```
+<div>
+  <mat-toolbar color="primary" class="navbar">
+    <div>Angular</div>
+    <div>
+      <span>Home</span>
+      <span>About</span>
+      <span>Services</span>
+    </div>
+  </mat-toolbar>
+</div>
+```
+
+## 8. Sidenav <a name="sidenav"/>
+![image](https://user-images.githubusercontent.com/71009398/126904552-8b818a0c-dfda-48ee-9fc2-6653b1e6f4b1.png)<br/>
+
+HTML:
+```
+<mat-sidenav-container>
+    <mat-sidenav #sidenav (opened)="log('Opened')" (closed)="log('Closed')" mode="side" [(opened)]="opened">Sidenav</mat-sidenav>
+    <mat-sidenav-content>Main
+      <button (click)="opened=!opened">Toggle Opened</button>
+      <button (click)="sidenav.open()">Open</button>
+      <button (click)="sidenav.close()">Close</button>
+      <button (click)="sidenav.toggle()">Toggle</button>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+
+<!--There are 3 modes that can be included int he mat-sidenav: over, push, and side-->
+```
+
+component.ts:
+```
+opened = false;
+
+  log(state: any)
+  {
+    console.log(state);
+  }
+```
 
 
+## 9. Menu <a name="menu"/>
+![image](https://user-images.githubusercontent.com/71009398/126904678-1ae2b3de-81fc-4696-9cfd-08cf31c4be20.png)<br/>
+![image](https://user-images.githubusercontent.com/71009398/126904684-845410c8-25cb-4f1d-b269-ad50adc671bf.png)
+![image](https://user-images.githubusercontent.com/71009398/126904699-f3c9777c-5818-4ac6-8297-97f37c398ed8.png)<br/>
+
+HTML:
+```
+<mat-menu #appMenu="matMenu" xPosition="after" yPosition="below"> <!--x and y position dictates how the menu should open.-->
+  <button mat-menu-item [matMenuTriggerFor]="subMenu">FrontEnd</button>
+  <button mat-menu-item>BackEnd</button>
+</mat-menu>
+
+<button class="center" mat-flat-button [matMenuTriggerFor]="appMenu">Menu</button>
+
+<mat-menu #subMenu="matMenu">
+  <button mat-menu-item>Android</button>
+  <button mat-menu-item>Angular</button>
+  <button mat-menu-item>React</button>
+</mat-menu>
+
+<mat-menu #lazyMenu="matMenu">
+  <ng-template matMenuContent let-name="name" let-hobby="hobby">
+    <button mat-menu-item>Settings</button>
+    <button mat-menu-item>Hobby is {{hobby}}</button>
+    <button mat-menu-item>Log out {{name}}</button>
+  </ng-template>
+</mat-menu>
+
+<button [matMenuTriggerData]="{name: 'Kratos', hobby: 'hunting'}" [matMenuTriggerFor]="lazyMenu">Kratos</button>
+<button [matMenuTriggerData]="{name: 'Atreus', hobby: 'reading'}" [matMenuTriggerFor]="lazyMenu">Atreus</button>
+```
 
 
 
