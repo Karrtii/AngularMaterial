@@ -826,7 +826,7 @@ applyFilter(filterValue: string)
 
 
 ## 25. Virtual Scrolling <a name="virtualScrolling"/>
-Only shows and initilizes items within the view.<br/>
+Only shows and initializes items within the view.<br/>
 Need to include 'ScrollingModule' in the imports array in app.module.ts.<br/>
 
 ![image](https://user-images.githubusercontent.com/71009398/127185131-574728a4-315b-4d92-8efb-9276173346e4.png)<br/>
