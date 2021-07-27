@@ -84,6 +84,7 @@ export class AppComponent implements OnInit{
     return this.options.filter(option => option.toLowerCase().includes(filterValue));
   }
 //autocomplete ends
+
   loadData()
   {
     this.showSpinner=true;
@@ -115,7 +116,7 @@ export class AppComponent implements OnInit{
     const day = date.getDay();
     return day != 0 && day != 6;
   };
-  //datepicker begins
+  //datepicker ends
 
 
   //snackbar begins, need to inject it
