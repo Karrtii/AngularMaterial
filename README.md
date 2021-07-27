@@ -23,6 +23,13 @@ Installing: ng add @angular/material
 16. [Input](#input)
 17. [Select](#select)
 18. [Autocomplete](#autocomplete)
+19. [Checkbox and Radio Button](#checkbox)
+20. [Date Picker](#datePicker)
+21. [Tooltip](#tooltip)
+22. [Snackbar](#snackbar)
+23. [Dialog](#dialog)
+24. [Data Table](#dataTable)
+25. [Virtual Scrolling](#virtualScrolling)
 
 ## 1. Typography <a name="typography"></a>
 ![image](https://user-images.githubusercontent.com/71009398/126654265-33302da7-a26d-4096-a9b2-1a263b1fa6a0.png)<br/>
@@ -550,6 +557,310 @@ displayFn(subject: any)
     return subject ? subject.name : undefined;
   }
 ```
+
+## 19. Checkbox and Radio Button <a name="checkbox"/>
+![image](https://user-images.githubusercontent.com/71009398/127180831-b53ed87f-bdce-4567-b621-f034d5c7c6aa.png)<br/>
+
+HTML:
+```
+<mat-checkbox class="spaceEvery">
+  Subscribe
+</mat-checkbox>
+<br>
+<mat-checkbox class="spaceEvery" labelPosition="before">
+  Subscribe
+</mat-checkbox>
+<br>
+<mat-checkbox class="spaceEvery" color="primary">
+  Subscribe
+</mat-checkbox>
+<br>
+<mat-checkbox class="spaceEvery" color="warn">
+  Subscribe
+</mat-checkbox>
+
+<br>
+<mat-radio-group class="spaceEvery">
+  <mat-radio-button value="angular" color="primary">Angular</mat-radio-button>
+  <mat-radio-button value="android">Android</mat-radio-button>
+  <mat-radio-button value="blazor" color="warn">Blazor</mat-radio-button>
+</mat-radio-group>
+```
+
+## 20. Date Picker <a name="datePicker"/>
+![image](https://user-images.githubusercontent.com/71009398/127181771-85f52ebc-9ec4-4ff2-ba09-8d38da01c511.png)<br/>
+
+HTML:
+```
+<mat-form-field class="spaceEvery">
+  <input matInput [matDatepicker]="myDatePicker" [matDatepickerFilter]="dateFilter" [min]="minDate" [max]="maxDate">
+  <mat-datepicker-toggle [for]="myDatePicker" matSuffix></mat-datepicker-toggle>
+  <mat-datepicker #myDatePicker></mat-datepicker> <!--startView="multi-year"-->
+</mat-form-field>
+```
+
+component.ts:
+```
+minDate = new Date();
+maxDate = new Date(2022, 3, 10); //month starts from 0, so this is actually April
+
+dateFilter = date => {
+  const day = date.getDay();
+  return day != 0 && day != 6;
+};
+```
+
+## 21. Tooltip <a name="tooltip"/>
+When you hover over it.<br/>
+![image](https://user-images.githubusercontent.com/71009398/127182391-4475321f-a4c8-42ef-a4ba-d23088c3f30f.png)<br/>
+
+HTML:
+```
+<button class="spaceEvery" mat-raised-button matTooltip="Welcome to your nightmare" matTooltipPosition="after" matTooltipShowDelay="500" matTooltipHideDelay="200">Hello</button>
+
+```
+
+
+## 22. Snackbar <a name="snackbar"/>
+![image](https://user-images.githubusercontent.com/71009398/127182671-49c8a399-3d4f-4ca0-8117-5be4c0f4e696.png)<br/>
+![image](https://user-images.githubusercontent.com/71009398/127182702-5a80a85a-0609-43a6-94a8-786eb412f7dd.png)<br/>
+
+module.ts:
+```
+//within the @NGModule
+entryComponents: [CustomSnackBarComponent]
+```
+
+HTML:
+```
+<button class="spaceEvery" mat-button (click)="openSnackBar('Item deleted', 'Undo')">Delete</button>
+<button mat-button (click)="openCustomSnackBar()">Show custom snackbar</button>
+```
+
+component.ts:
+```
+//outside of the component class:
+@Component({
+  selector: 'custom-snackbar',
+  template: `<span style="color: orange">Custom Snackbar</span>`
+})
+export class CustomSnackBarComponent {}
+
+//dependency injection
+constructor(private snackBar: MatSnackBar) {
+  }
+
+openSnackBar(message, action)
+  {
+    let snackBarRef = this.snackBar.open(message, action, {duration: 2000});
+
+    snackBarRef.afterDismissed().subscribe(() => {
+      console.log('The snackbar was dismissed');
+    });
+
+    snackBarRef.onAction().subscribe(() => {
+      console.log('The snackbar action was triggered');
+    });
+  }
+
+  openCustomSnackBar()
+  {
+    this.snackBar.openFromComponent(CustomSnackBarComponent, {duration: 2000});
+  }
+```
+
+
+## 23. Dialog <a name="dialog"/>
+Has 2 HTML and .ts code because the dialog itself is a component.<br/>
+
+![image](https://user-images.githubusercontent.com/71009398/127183306-4b10a3fa-ef40-4e2c-b364-d085d3ec5756.png)<br/>
+
+
+module.ts:
+```
+//within the @NGModule
+entryComponents: [DialogExampleComponent]
+```
+
+HTML (app.component.html):
+```
+<button class="spaceEvery" mat-raised-button (click)="openDialog()">Open Dialog</button>
+
+```
+
+app.component.ts:
+```
+//need to inject it, need to create a component as well
+
+constructor(private dialog: MatDialog) {
+  }
+
+  openDialog()
+  {
+    let dialogRef = this.dialog.open(DialogExampleComponent, {data: {name: 'Kratos'}});
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    })
+  }
+```
+
+HTML (dialog-example.component.html):
+```
+<h2 mat-dialog-title>Session timeout</h2>
+<mat-dialog-content>Hi {{data.name}}. You will be logged out due to inactivity</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button mat-dialog-close mat-dialog-close="true">Keep me logged in</button>
+  <button mat-button mat-dialog-close mat-dialog-close="false">Log out</button>
+</mat-dialog-actions>
+```
+
+dialog-example.component.ts:
+```
+constructor(@Inject(MAT_DIALOG_DATA) public data: any) { }
+```
+
+
+## 24 Data Table <a name="dataTable"/>
+Includes filtering, sorting and pagination. <br/>
+
+![image](https://user-images.githubusercontent.com/71009398/127184210-6a44986f-11bd-4a08-acee-2af67858bf0e.png)<br/>
+![image](https://user-images.githubusercontent.com/71009398/127184287-7899648d-76bd-45ee-972c-3305d273bc1e.png)<br/>
+
+HTML:
+```
+<mat-form-field class="spaceEvery">
+  <input (keyup)="applyFilter($any($event.target).value)" matInput placeholder="Filter">
+</mat-form-field>
+
+
+<div class="mat-elevation-z8 spaceEvery">
+<table mat-table [dataSource]="dataSource"  matSort>
+
+
+  <ng-container matColumnDef="position">
+    <th mat-header-cell mat-sort-header *matHeaderCellDef> No. </th>
+    <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+  </ng-container>
+
+
+  <ng-container matColumnDef="name">
+    <th mat-header-cell mat-sort-header *matHeaderCellDef> Name </th>
+    <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+  </ng-container>
+
+
+  <ng-container matColumnDef="weight">
+    <th mat-header-cell mat-sort-header *matHeaderCellDef> Weight </th>
+    <td mat-cell *matCellDef="let element"> {{element.weight}} </td>
+  </ng-container>
+
+
+  <ng-container matColumnDef="symbol">
+    <th mat-header-cell *matHeaderCellDef> Symbol </th>
+    <td mat-cell *matCellDef="let element"> {{element.symbol}} </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+<mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+</div>
+```
+
+CSS:
+```
+table {
+  width: 100%;
+}
+```
+
+component.ts:
+```
+//seperate interface (NOT INSIDE APP.COMPONENT.TS CLASS)
+export interface PeriodicElement {
+  name: string;
+  position: number;
+  weight: number;
+  symbol: string;
+}
+
+//dummy data (NOT INSIDE APP.COMPONENT.TS CLASS)
+const ELEMENT_DATA: PeriodicElement[] = [
+  {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H'},
+  {position: 2, name: 'Helium', weight: 4.0026, symbol: 'He'},
+  {position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li'},
+  {position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be'},
+  {position: 5, name: 'Boron', weight: 10.811, symbol: 'B'},
+  {position: 6, name: 'Carbon', weight: 12.0107, symbol: 'C'},
+  {position: 7, name: 'Nitrogen', weight: 14.0067, symbol: 'N'},
+  {position: 8, name: 'Oxygen', weight: 15.9994, symbol: 'O'},
+  {position: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F'},
+  {position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne'},
+];
+
+
+ngOnInit() {
+    //for data table sorting
+    this.dataSource.sort = this.sort;
+
+    //for data table pagination
+    this.dataSource.paginator = this.paginator;
+  }
+  
+displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
+dataSource = new MatTableDataSource(ELEMENT_DATA);
+
+//for filtering
+applyFilter(filterValue: string)
+{
+  this.dataSource.filter = filterValue.trim().toLowerCase();
+}
+
+//for sorting
+@ViewChild(MatSort) sort: MatSort;
+
+//for pagination
+@ViewChild(MatPaginator) paginator: MatPaginator;
+```
+
+
+## 25. Virtual Scrolling <a name="virtualScrolling"/>
+Only shows and initilizes items within the view.<br/>
+Need to include 'ScrollingModule' in the imports array in app.module.ts.<br/>
+
+![image](https://user-images.githubusercontent.com/71009398/127185131-574728a4-315b-4d92-8efb-9276173346e4.png)<br/>
+
+HTML:
+```
+<cdk-virtual-scroll-viewport itemSize="100" class="container">
+  <div *cdkVirtualFor="let number of numbers" class="number">
+    {{number}}
+  </div>
+</cdk-virtual-scroll-viewport>
+```
+
+CSS:
+```
+.number {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid maroon;
+  box-sizing: border-box;
+  height: 100px;
+}
+
+.container {
+  height: 400px;
+}
+```
+
+component.ts:
+```
+  numbers = [];
+```
+
 
 
 
